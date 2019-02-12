@@ -1,6 +1,6 @@
 # CMake entry point
 cmake_minimum_required (VERSION 3.0)
-project (OPENGLTutorials)
+project (BasicOpenGLGame)
 
 find_package(OpenGL REQUIRED)
 
@@ -58,14 +58,9 @@ add_definitions(
 	-DGLEW_STATIC
 	-D_CRT_SECURE_NO_WARNINGS
 )
-
-
-
-#***************** TO BE ADDED FOR working with new game *****************
 FILE(GLOB SRC_FILES "basicgame/*.hlsl")
 set_source_files_properties(${SRC_FILES} PROPERTIES VS_TOOL_OVERRIDE "None")
 
-# basic game
 add_executable(basicgame
 	basicgame/View.cpp
 	basicgame/View.hpp
@@ -103,4 +98,9 @@ target_link_libraries(basicgame
 )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*hlsl*" )
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
+
+#add_custom_command(
+#   TARGET playground POST_BUILD
+#   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/playground${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/playground/"
+#)
 
